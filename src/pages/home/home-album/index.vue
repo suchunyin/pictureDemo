@@ -1,11 +1,3 @@
-<!--
- * @Author: suchunyin 1831869101@qq.com
- * @Date: 2024-08-15 13:39:18
- * @LastEditors: suchunyin 1831869101@qq.com
- * @LastEditTime: 2024-08-23 13:49:23
- * @FilePath: \my-project\src\pages\home\home-recommend\index.vue
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
 <template>
   <scroll-view scroll-y class="album-content" @scrolltolower="hanaleToLower">
     <view class="album-swiper">
