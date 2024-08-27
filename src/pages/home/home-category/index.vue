@@ -65,7 +65,7 @@ export default {
       padding: 0 10rpx;
       font-size: 36rpx;
       font-weight: 600;
-      color: #fff;
+      color: #b6b5b5;
     }
   }
 }

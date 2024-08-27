@@ -2,7 +2,7 @@
  * @Author: suchunyin 1831869101@qq.com
  * @Date: 2024-08-23 17:43:28
  * @LastEditors: suchunyin 1831869101@qq.com
- * @LastEditTime: 2024-08-27 15:02:48
+ * @LastEditTime: 2024-08-27 16:19:30
  * @FilePath: \my-project\src\pages\video\videoPlay.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -14,8 +14,8 @@
         <view class="iconfont icon-jingyin" v-if="muted"></view>
         <view class="iconfont icon-shengyin" v-else></view>
       </view>
-      <view class="iconfont icon-zhuanfa">
-        <button open-type="share" class="btn"></button>
+      <view class="iconfont icon-zhuanfa" @click="handleShare">
+        <!-- <button open-type="share" class="btn"></button> -->
       </view>
     </view>
     <view class="video-wrap">
@@ -37,18 +37,20 @@ export default {
   },
   methods: {
     async handleDownload() {
+      await uni.showLoading({ title: "下载中" });
       const { tempFilePath } = await uni.downloadFile({ url: this.data.video });
-      console.log(tempFilePath);
 
-      const res = await wx.getFileSystemManager.saveFile({ tempFilePath });
-      console.log(res);
+      wx.getFileSystemManager().saveFile({
+        tempFilePath,
+        success: async (res) => {
+          uni.hideLoading();
+          await uni.showToast({ title: "下载成功" });
+        },
+      });
     },
     async handleShare() {
       const { tempFilePath } = await uni.downloadFile({ url: this.data.video });
-      console.log(tempFilePath);
-
       const res = await wx.shareVideoMessage({ videoPath: tempFilePath });
-      console.log(res);
     },
   },
   onLoad({ item }) {
